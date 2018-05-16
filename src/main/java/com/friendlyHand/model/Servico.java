@@ -1,6 +1,10 @@
 package com.friendlyHand.model;
 
-import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,10 +19,14 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	"preco"
 })
 
-public class Servico implements Serializable{
+@Entity
+public class Servico{
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@JsonProperty("id_servico")
 	private int id;
+	@OneToOne
 	@JsonProperty("prestador")
 	private Prestador prestador;
 	@JsonProperty("nome")

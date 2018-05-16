@@ -1,7 +1,16 @@
 package com.friendlyHand.model;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 	@JsonPropertyOrder({
-	"id",
+	"id_prestador",
 	"nome",
 	"email",
 	"cpf",
@@ -19,9 +28,13 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	"servicos",
 	"servico_contratados"
 	})
-	public class Prestador implements Serializable{
 
-	@JsonProperty("id")
+	@Entity
+	public class Prestador{
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonProperty("id_prestador")
 	private int id;
 	@JsonProperty("nome")
 	private String nome;
@@ -33,20 +46,25 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	private String dataNascimento;
 	@JsonProperty("senha")
 	private String senha;
+	@OneToOne(cascade=CascadeType.ALL)
 	@JsonProperty("endereco")
 	private Endereco endereco;
+	@OneToMany(cascade=CascadeType.ALL)
+	@ElementCollection(targetClass=Servico.class)
 	@JsonProperty("servicos")
 	private List<Servico> servicos;
+	@OneToMany(cascade=CascadeType.ALL)
+	@ElementCollection(targetClass=ServicoContratado.class)
 	@JsonProperty("servico_contratados")
 	private List<ServicoContratado> servicosContratados;
 	
 
-	@JsonProperty("id")
+	@JsonProperty("id_prestador")
 	public int getId() {
 	return id;
 	}
 
-	@JsonProperty("id")
+	@JsonProperty("id_prestador")
 	public void setId(int id) {
 	this.id = id;
 	}
@@ -113,6 +131,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 	@JsonProperty("servicos")
 	public List<Servico> getServicos() {
+		if(servicos==null) {
+			return servicos = new ArrayList<Servico>();
+		}
 		return servicos;
 	}
 

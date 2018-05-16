@@ -1,6 +1,9 @@
 package com.friendlyHand.model;
 
-import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+	"id_endereco",
 	"cep",
 	"rua",
 	"numero",
@@ -15,9 +19,14 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	"cidade",
 	"uf"
 	})
-public class Endereco implements Serializable{
 
+@Entity
+public class Endereco{
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonProperty("id_endereco")
+	private int id;
 	@JsonProperty("cep")
 	private int cep;
 	@JsonProperty("rua")
@@ -31,6 +40,16 @@ public class Endereco implements Serializable{
 	@JsonProperty("uf")
 	private String uf;
 	
+	@JsonProperty("id_endereco")
+	public int getId() {
+		return id;
+	}
+
+	@JsonProperty("id_endereco")
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	@JsonProperty("cep")
 	public int getCep() {
 	return cep;

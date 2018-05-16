@@ -1,6 +1,10 @@
 package com.friendlyHand.model;
 
-import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,14 +20,22 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	"concluido"
 })
 
-public class ServicoContratado implements Serializable{
+@Entity
+public class ServicoContratado{
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@JsonProperty("id_servico_contratado")
 	private int id;
+	@OneToOne
 	@JsonProperty("prestador")
 	private Prestador prestador;
+	@OneToOne
 	@JsonProperty("cliente")
 	private Cliente cliente;
+	@OneToOne
+	@JsonProperty("servico")
+	private Servico servico;
 	@JsonProperty("data")
 	private String data;
 	@JsonProperty("confirmado")
@@ -59,6 +71,17 @@ public class ServicoContratado implements Serializable{
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	
+	@JsonProperty("servico")
+	public Servico getServico() {
+		return servico;
+	}
+
+	@JsonProperty("servico")
+	public void setServico(Servico servico) {
+		this.servico = servico;
+	}
+
 	@JsonProperty("data")
 	public String getData() {
 		return data;
@@ -86,5 +109,6 @@ public class ServicoContratado implements Serializable{
 	public void setConcluido(boolean concluido) {
 		this.concluido = concluido;
 	}
+	
 
 }

@@ -1,7 +1,13 @@
 package com.friendlyHand.model;
 
-import java.io.Serializable;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 	@JsonPropertyOrder({
-	"id",
+	"id_cliente",
 	"nome",
 	"email",
 	"cpf",
@@ -19,13 +25,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	"servico_contratados"
 	})
 	
-	public class Cliente implements Serializable{
+	@Entity
+	public class Cliente{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	@JsonProperty("id")
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonProperty("id_cliente")
 	private int id;
 	@JsonProperty("nome")
 	private String nome;
@@ -37,18 +42,20 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	private String dataNascimento;
 	@JsonProperty("senha")
 	private String senha;
+	@OneToOne
 	@JsonProperty("endereco")
 	private Endereco endereco;
+	@OneToMany
 	@JsonProperty("servico_contratados")
 	private List<ServicoContratado> servicosContratados;
 	
 
-	@JsonProperty("id")
+	@JsonProperty("id_cliente")
 	public int getId() {
 	return id;
 	}
 
-	@JsonProperty("id")
+	@JsonProperty("id_cliente")
 	public void setId(int id) {
 	this.id = id;
 	}
