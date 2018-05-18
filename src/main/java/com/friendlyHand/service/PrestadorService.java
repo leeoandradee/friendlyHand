@@ -27,9 +27,9 @@ public class PrestadorService {
 	public List<Prestador> getAllPrestadors(){
 		
 		TypedQuery<Prestador> consulta = manager.createQuery("FROM Prestador", Prestador.class);
-		List<Prestador> artigos = consulta.getResultList();
+		List<Prestador> prestadores = consulta.getResultList();
 
-		return artigos;
+		return prestadores;
 	}
 	
 	/*------------CRIAR UM PRESTADOR-----------*/

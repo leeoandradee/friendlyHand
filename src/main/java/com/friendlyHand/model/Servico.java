@@ -1,5 +1,6 @@
 package com.friendlyHand.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +27,7 @@ public class Servico{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@JsonProperty("id_servico")
 	private int id;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JsonProperty("prestador")
 	private Prestador prestador;
 	@JsonProperty("nome")

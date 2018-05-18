@@ -2,6 +2,8 @@ package com.friendlyHand.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -42,10 +44,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	private String dataNascimento;
 	@JsonProperty("senha")
 	private String senha;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JsonProperty("endereco")
 	private Endereco endereco;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
+	@ElementCollection(targetClass=ServicoContratado.class)
 	@JsonProperty("servico_contratados")
 	private List<ServicoContratado> servicosContratados;
 	
