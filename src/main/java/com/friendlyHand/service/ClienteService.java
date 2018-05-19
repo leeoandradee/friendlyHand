@@ -13,11 +13,10 @@ import com.friendlyHand.utils.JPAUtil;
 public class ClienteService {
 	
 	
-	EntityManager manager = new JPAUtil().getEntityManager();
-	
 	/*------------MOSTRAR UM Cliente-----------*/
 	public Cliente getCliente(int id){
 
+		EntityManager manager = new JPAUtil().getEntityManager();
 		Cliente cliente = manager.find(Cliente.class, id);
 		
 		return cliente;
@@ -26,6 +25,7 @@ public class ClienteService {
 	/*------------MOSTRAR TODOS OS Cliente-----------*/
 	public List<Cliente> getAllClientes(){
 		
+		EntityManager manager = new JPAUtil().getEntityManager();
 		TypedQuery<Cliente> consulta = manager.createQuery("FROM Cliente", Cliente.class);
 		List<Cliente> clientes = consulta.getResultList();
 
@@ -35,9 +35,11 @@ public class ClienteService {
 	/*------------CRIAR UM Cliente-----------*/
 	public Cliente createCliente(Cliente cliente){
 		
+		EntityManager manager = new JPAUtil().getEntityManager();
 		manager.getTransaction().begin();
 		manager.persist(cliente);
 		manager.getTransaction().commit();
+		manager.close();
 		
 		return cliente;	
 	}
@@ -45,7 +47,8 @@ public class ClienteService {
 	/*------------ATUALIZAR UM Cliente-----------*/
 	public Cliente updateCliente(Cliente cliente, int id)  {
 		
-		
+		EntityManager manager = new JPAUtil().getEntityManager();
+		manager.getTransaction().begin();
 		Cliente ClienteBanco = manager.find(Cliente.class, id);
 		if(ClienteBanco!=null) {
 			ClienteBanco.setNome(cliente.getNome());
@@ -55,8 +58,9 @@ public class ClienteService {
 			ClienteBanco.setDataNascimento(cliente.getDataNascimento());
 			ClienteBanco.setSenha(cliente.getSenha());
 			ClienteBanco.setServicosContratados(cliente.getServicosContratados());
-			manager.getTransaction().begin();
+			manager.merge(cliente);
 			manager.getTransaction().commit();
+			manager.close();
 		}
 
 		return ClienteBanco;
@@ -65,6 +69,7 @@ public class ClienteService {
 	/*------------DELETAR UM Cliente-----------*/
 	public MensagemRetorno deleteCliente(int id){
 		
+		EntityManager manager = new JPAUtil().getEntityManager();
 		MensagemRetorno retorno = new MensagemRetorno();
 		Cliente cliente = manager.find(Cliente.class, id);
 		

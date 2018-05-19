@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Service;
+
 import com.friendlyHand.model.MensagemRetorno;
 import com.friendlyHand.model.Prestador;
 import com.friendlyHand.utils.JPAUtil;
@@ -12,12 +14,12 @@ import com.friendlyHand.utils.JPAUtil;
 @Service
 public class PrestadorService {
 	
-	
-	EntityManager manager = new JPAUtil().getEntityManager();
+
 	
 	/*------------MOSTRAR UM PRESTADOR-----------*/
 	public Prestador getPrestador(int id){
 
+		EntityManager manager = new JPAUtil().getEntityManager();
 		Prestador prestador = manager.find(Prestador.class, id);
 		
 		return prestador;
@@ -26,6 +28,7 @@ public class PrestadorService {
 	/*------------MOSTRAR TODOS OS PRESTADOR-----------*/
 	public List<Prestador> getAllPrestadors(){
 		
+		EntityManager manager = new JPAUtil().getEntityManager();
 		TypedQuery<Prestador> consulta = manager.createQuery("FROM Prestador", Prestador.class);
 		List<Prestador> prestadores = consulta.getResultList();
 
@@ -35,9 +38,11 @@ public class PrestadorService {
 	/*------------CRIAR UM PRESTADOR-----------*/
 	public Prestador createPrestador(Prestador prestador){
 		
+		EntityManager manager = new JPAUtil().getEntityManager();
 		manager.getTransaction().begin();
 		manager.persist(prestador);
 		manager.getTransaction().commit();
+		manager.close();
 		
 		return prestador;	
 	}
@@ -45,7 +50,8 @@ public class PrestadorService {
 	/*------------ATUALIZAR UM PRESTADOR-----------*/
 	public Prestador updatePrestador(Prestador prestador, int id)  {
 		
-		
+		EntityManager manager = new JPAUtil().getEntityManager();
+		manager.getTransaction().begin();
 		Prestador prestadorBanco = manager.find(Prestador.class, id);
 		if(prestadorBanco!=null) {
 			prestadorBanco.setNome(prestador.getNome());
@@ -56,16 +62,19 @@ public class PrestadorService {
 			prestadorBanco.setSenha(prestador.getSenha());
 			prestadorBanco.setServicos(prestador.getServicos());
 			prestadorBanco.setServicosContratados(prestador.getServicosContratados());
-			manager.getTransaction().begin();
+			manager.merge(prestadorBanco);
 			manager.getTransaction().commit();
+			manager.close();
+			return prestadorBanco;
 		}
 
-		return prestadorBanco;
+		return null;
 	}
 	
 	/*------------DELETAR UM PRESTADOR-----------*/
 	public MensagemRetorno deletePrestador(int id){
 		
+		EntityManager manager = new JPAUtil().getEntityManager();
 		MensagemRetorno retorno = new MensagemRetorno();
 		Prestador prestador = manager.find(Prestador.class, id);
 		

@@ -50,8 +50,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	@JsonProperty("endereco")
 	private Endereco endereco;
 	@OneToMany(cascade=CascadeType.ALL)
-	@ElementCollection(targetClass=Servico.class)
 	@JsonProperty("servicos")
+	@ElementCollection(targetClass=Servico.class)
 	private List<Servico> servicos;
 	@OneToMany(cascade=CascadeType.ALL)
 	@ElementCollection(targetClass=ServicoContratado.class)

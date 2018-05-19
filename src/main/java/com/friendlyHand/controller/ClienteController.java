@@ -17,7 +17,7 @@ import com.friendlyHand.service.ClienteService;
 public class ClienteController {
 	
 	@Autowired
-	ClienteService clientService;
+	private ClienteService clientService;
 	
 	@RequestMapping(method=RequestMethod.GET, value="/clientes")
 	public List<Cliente> getAllClientes() {

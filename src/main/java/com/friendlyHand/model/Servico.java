@@ -1,11 +1,9 @@
 package com.friendlyHand.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
 	"id_servico",
-	"prestador",
+	"id_prestador",
 	"nome",
 	"descricao",
 	"preco"
@@ -27,9 +25,8 @@ public class Servico{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@JsonProperty("id_servico")
 	private int id;
-	@OneToOne(cascade=CascadeType.ALL)
-	@JsonProperty("prestador")
-	private Prestador prestador;
+	@JsonProperty("id_prestador")
+	private int id_prestador;
 	@JsonProperty("nome")
 	private String nomeServico;
 	@JsonProperty("descricao")
@@ -58,15 +55,20 @@ public class Servico{
 		this.nomeServico = nomeServico;
 	}
 	
-	@JsonProperty("prestador")
-	public Prestador getPrestador() {
-		return prestador;
-	}
-	@JsonProperty("prestador")
-	public void setPrestador(Prestador prestador) {
-		this.prestador = prestador;
+	@JsonProperty("id_prestador")
+	public int getId_prestador() {
+		return id_prestador;
 	}
 	
+	@JsonProperty("id_prestador")
+	public void setPrestador(int id_prestador) {
+		this.id_prestador = id_prestador;
+	}
+
+	public void setId_prestador(int id_prestador) {
+		this.id_prestador = id_prestador;
+	}
+
 	@JsonProperty("descricao")
 	public String getDescricao() {
 		return descricao;

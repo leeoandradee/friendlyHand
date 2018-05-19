@@ -13,8 +13,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
 	"id_servico_contratado",
-	"prestador",
-	"cliente",
+	"id_prestador",
+	"id_cliente",
 	"data",
 	"confirmado",
 	"concluido"
@@ -28,14 +28,14 @@ public class ServicoContratado{
 	@JsonProperty("id_servico_contratado")
 	private int id;
 	@OneToOne
-	@JsonProperty("prestador")
-	private Prestador prestador;
+	@JsonProperty("id_prestador")
+	private int id_prestador;
 	@OneToOne
-	@JsonProperty("cliente")
-	private Cliente cliente;
+	@JsonProperty("id_cliente")
+	private int id_cliente;
 	@OneToOne
-	@JsonProperty("servico")
-	private Servico servico;
+	@JsonProperty("id_servico")
+	private int id_servico;
 	@JsonProperty("data")
 	private String data;
 	@JsonProperty("confirmado")
@@ -53,33 +53,34 @@ public class ServicoContratado{
 		this.id = id;
 	}
 	
-	@JsonProperty("prestador")
-	public Prestador getPrestador() {
-		return prestador;
-	}
-	@JsonProperty("prestador")
-	public void setPrestador(Prestador prestador) {
-		this.prestador = prestador;
-	}
-	
-	@JsonProperty("cliente")
-	public Cliente getCliente() {
-		return cliente;
-	}
-	
-	@JsonProperty("cliente")
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-	
-	@JsonProperty("servico")
-	public Servico getServico() {
-		return servico;
+	@JsonProperty("id_prestador")
+	public int getId_prestador() {
+		return id_prestador;
 	}
 
-	@JsonProperty("servico")
-	public void setServico(Servico servico) {
-		this.servico = servico;
+	@JsonProperty("id_prestador")
+	public void setId_prestador(int id_prestador) {
+		this.id_prestador = id_prestador;
+	}
+
+	@JsonProperty("id_cliente")
+	public int getId_cliente() {
+		return id_cliente;
+	}
+
+	@JsonProperty("id_cliente")
+	public void setId_cliente(int id_cliente) {
+		this.id_cliente = id_cliente;
+	}
+
+	@JsonProperty("id_servico")
+	public int getId_servico() {
+		return id_servico;
+	}
+
+	@JsonProperty("id_servico")
+	public void setId_servico(int id_servico) {
+		this.id_servico = id_servico;
 	}
 
 	@JsonProperty("data")
