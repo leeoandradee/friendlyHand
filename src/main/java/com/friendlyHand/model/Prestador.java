@@ -44,6 +44,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	private String cpf;
 	@JsonProperty("dataNascimento")
 	private String dataNascimento;
+	@JsonProperty("celular")
+	private String celular;
+	@JsonProperty("foto")
+	private String foto;
 	@JsonProperty("senha")
 	private String senha;
 	@OneToOne(cascade=CascadeType.ALL)
@@ -119,6 +123,26 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 		this.dataNascimento = dataNascimento;
 	}
 
+	@JsonProperty("celular")
+	public String getCelular() {
+		return celular;
+	}
+
+	@JsonProperty("celular")
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	@JsonProperty("foto")
+	public String getFoto() {
+		return foto;
+	}
+
+	@JsonProperty("foto")
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+	
 	@JsonProperty("endereco")
 	public Endereco getEndereco() {
 		return endereco;

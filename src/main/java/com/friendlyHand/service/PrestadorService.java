@@ -59,6 +59,8 @@ public class PrestadorService {
 			prestadorBanco.setCpf(prestador.getCpf());
 			prestadorBanco.setEndereco(prestador.getEndereco());
 			prestadorBanco.setDataNascimento(prestador.getDataNascimento());
+			prestadorBanco.setCelular(prestador.getCelular());
+			prestadorBanco.setFoto(prestador.getFoto());
 			prestadorBanco.setSenha(prestador.getSenha());
 			prestadorBanco.setServicos(prestador.getServicos());
 			prestadorBanco.setServicosContratados(prestador.getServicosContratados());

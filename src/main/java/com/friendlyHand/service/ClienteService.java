@@ -58,6 +58,8 @@ public class ClienteService {
 			ClienteBanco.setCpf(cliente.getCpf());
 			ClienteBanco.setEndereco(cliente.getEndereco());
 			ClienteBanco.setDataNascimento(cliente.getDataNascimento());
+			ClienteBanco.setCelular(cliente.getCelular());
+			ClienteBanco.setFoto(cliente.getFoto());
 			ClienteBanco.setSenha(cliente.getSenha());
 			ClienteBanco.setServicosContratados(cliente.getServicosContratados());
 			manager.merge(cliente);
