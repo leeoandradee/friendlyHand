@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Service;
-import com.friendlyHand.model.MensagemRetorno;
+
 import com.friendlyHand.model.Cliente;
+import com.friendlyHand.model.MensagemRetorno;
 import com.friendlyHand.utils.JPAUtil;
 
 @Service
@@ -45,7 +47,7 @@ public class ClienteService {
 	}
 
 	/*------------ATUALIZAR UM Cliente-----------*/
-	public Cliente updateCliente(Cliente cliente, int id)  {
+	public Cliente updateCliente(Cliente cliente, int id){
 		
 		EntityManager manager = new JPAUtil().getEntityManager();
 		manager.getTransaction().begin();

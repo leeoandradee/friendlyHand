@@ -29,86 +29,94 @@ public class ServicoContratadoService {
 	public List<ServicoContratado> getAllServicosContratados(){
 		
 		EntityManager manager = new JPAUtil().getEntityManager();
-		TypedQuery<ServicoContratado> consulta = manager.createQuery("FROM Servico", ServicoContratado.class);
+		TypedQuery<ServicoContratado> consulta = manager.createQuery("FROM servicocontratado", ServicoContratado.class);
 		List<ServicoContratado> servicosContratados = consulta.getResultList();
 
 		return servicosContratados;
 	}
 	
-	public ServicoContratado createServicoContratado(int idPrestador, int idCliente, int idServico){
+	public ServicoContratado createServicoContratado(ServicoContratado servicoContratado){
 		
 		EntityManager manager = new JPAUtil().getEntityManager();
 		manager.getTransaction().begin();
 		
-		Cliente cliente = manager.find(Cliente.class, idCliente);
+		
+		Cliente cliente = manager.find(Cliente.class, servicoContratado.getId_cliente());
 		if(cliente!=null) {
-			Prestador prestador = manager.find(Prestador.class, idPrestador);
+			Prestador prestador = manager.find(Prestador.class,servicoContratado.getId_prestador());
 			if(prestador!=null) {
 				for (Servico servicos : prestador.getServicos()) {
-					if(servicos.getId()==idServico) {
-						Servico servico = manager.find(Servico.class, idServico);
+					if(servicos.getId()==servicoContratado.getId_servico()) {
+						Servico servico = manager.find(Servico.class,servicoContratado.getId_servico());
 						if(servico!=null) {
-							ServicoContratado servicoContratado = new ServicoContratado();
-							servicoContratado.setId_cliente(idCliente);
-							servicoContratado.setId_servico(idServico);
-							servicoContratado.setId_prestador(idPrestador);
 							TratamentoData bean = new TratamentoData();
 							servicoContratado.setData(bean.gerarData());
+							cliente.getServicosContratados().add(servicoContratado);
+							prestador.getServicosContratados().add(servicoContratado);
+							manager.persist(prestador);
+							manager.persist(cliente);
+							manager.getTransaction().commit();
+							manager.close();
 							return servicoContratado;
 						}
 					}
 				}
 			}
 		}
-		
+		manager.close();
 		return null;
 	}
 	
-	/*------------ATUALIZAR UM SERVICO-----------*/
-	public Servico updateServico(int idPrestador, int idServico, Servico servicoCanal){
+	public ServicoContratado updateServicoContratado(ServicoContratado servicoContratado){
 		
 		EntityManager manager = new JPAUtil().getEntityManager();
 		manager.getTransaction().begin();
-		Prestador prestador = manager.find(Prestador.class, idPrestador);
-		if(prestador!=null) {
-			for (Servico servico : prestador.getServicos()) {
-				if(servico.getId()==idServico) {
-					Servico servicoBanco = manager.find(Servico.class, idServico);
-					if(servicoBanco!=null) {
-						servicoBanco = servicoCanal;
-						servicoBanco.setId(idServico);
-						servicoBanco.setId_prestador(idPrestador);
-						manager.merge(servicoBanco);
-						manager.getTransaction().commit();
-						manager.close();
-						return servicoBanco;
+		
+		Cliente cliente = manager.find(Cliente.class, servicoContratado.getId_cliente());
+		if(cliente!=null) {
+			Prestador prestador = manager.find(Prestador.class,servicoContratado.getId_prestador());
+			if(prestador!=null) {
+				for (Servico servicos : prestador.getServicos()) {
+					if(servicos.getId()==servicoContratado.getId_servico()) {
+						Servico servico = manager.find(Servico.class,servicoContratado.getId_servico());
+						if(servico!=null) {
+							ServicoContratado servicoContratadoRetorno = manager.find(ServicoContratado.class, servicoContratado.getId());
+							if(servicoContratadoRetorno!=null) {
+								servicoContratadoRetorno.setConfirmado(servicoContratado.isConfirmado());
+								servicoContratadoRetorno.setConcluido(servicoContratado.isConcluido());
+								manager.merge(servicoContratadoRetorno);
+								manager.getTransaction().commit();
+								manager.close();
+								return servicoContratadoRetorno;
+							}
+						}
 					}
 				}
 			}
 		}
 		
+		manager.close();
 		return null;
 	}
 	
-	/*------------DELETAR UM SERVICO-----------*/
-	public MensagemRetorno deleteServico(int idServico) {
+	public MensagemRetorno deleteServico(int idServicoContratado) {
 		
 		EntityManager manager = new JPAUtil().getEntityManager();
 		MensagemRetorno retorno = new MensagemRetorno();
-		Servico servico = manager.find(Servico.class, idServico);
+		ServicoContratado servicoContratado = manager.find(ServicoContratado.class, idServicoContratado);
 		
-		if(servico!=null) {
+		if(servicoContratado!=null) {
 			manager.getTransaction().begin();
-			manager.remove(servico);
+			manager.remove(servicoContratado);
 			manager.getTransaction().commit();
 			retorno.setStatus("OK");
-			retorno.setMensagem("Prestador deletado com sucesso!");
+			retorno.setMensagem("Servico Contratado deletado com sucesso!");
 
 		}else {
 			retorno.setStatus("ERRO");
-			retorno.setMensagem("Prestador não encontrado.");
+			retorno.setMensagem("Servico Contratado não encontrado.");
 		}
-		
+		manager.close();
 		return retorno;	
 	}
 

@@ -43,5 +43,6 @@ public class ServicoController {
 	public MensagemRetorno updateServico(@PathVariable("id_servico") int idServico) {
 		return servicoService.deleteServico(idServico);
 	}
+	
 
 }

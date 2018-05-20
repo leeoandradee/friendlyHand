@@ -90,11 +90,11 @@ public class ServicoService {
 			manager.remove(servico);
 			manager.getTransaction().commit();
 			retorno.setStatus("OK");
-			retorno.setMensagem("Prestador deletado com sucesso!");
+			retorno.setMensagem("Servico deletado com sucesso!");
 
 		}else {
 			retorno.setStatus("ERRO");
-			retorno.setMensagem("Prestador não encontrado.");
+			retorno.setMensagem("Servico não encontrado.");
 		}
 		
 		return retorno;	

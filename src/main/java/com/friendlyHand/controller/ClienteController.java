@@ -35,7 +35,7 @@ public class ClienteController {
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/cliente/{id}")
-	public Cliente atualizarCliente(@RequestBody Cliente cliente, @PathVariable("id") int id) {
+	public Cliente atualizarCliente(@RequestBody Cliente cliente, @PathVariable("id") int id){
 		return clientService.updateCliente(cliente, id);	
 	}
 
