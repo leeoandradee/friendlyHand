@@ -60,9 +60,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	@ElementCollection(targetClass=Servico.class)
 	private List<Servico> servicos;
 	@OneToMany(cascade=CascadeType.ALL)
-	@ElementCollection(targetClass=ServicoContratado.class)
+	@ElementCollection(targetClass=Servicocontratado.class)
 	@JsonProperty("servico_contratados")
-	private List<ServicoContratado> servicosContratados;
+	private List<Servicocontratado> servicosContratados;
 	
 
 	@JsonProperty("id_prestador")
@@ -169,12 +169,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	}
 
 	@JsonProperty("servico_contratados")
-	public List<ServicoContratado> getServicosContratados() {
+	public List<Servicocontratado> getServicosContratados() {
 		return servicosContratados;
 	}
 
 	@JsonProperty("servico_contratados")
-	public void setServicosContratados(List<ServicoContratado> servicosContratados) {
+	public void setServicosContratados(List<Servicocontratado> servicosContratados) {
 		this.servicosContratados = servicosContratados;
 	}
 

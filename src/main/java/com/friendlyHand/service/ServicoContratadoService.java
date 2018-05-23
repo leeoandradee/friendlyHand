@@ -11,31 +11,41 @@ import com.friendlyHand.model.Cliente;
 import com.friendlyHand.model.MensagemRetorno;
 import com.friendlyHand.model.Prestador;
 import com.friendlyHand.model.Servico;
-import com.friendlyHand.model.ServicoContratado;
+import com.friendlyHand.model.Servicocontratado;
 import com.friendlyHand.utils.JPAUtil;
 import com.friendlyHand.utils.TratamentoData;
 
 @Service
 public class ServicoContratadoService {
 	
-	public ServicoContratado getServicoContratado(int id){
+	public Servicocontratado getServicoContratado(int id){
 
 		EntityManager manager = new JPAUtil().getEntityManager();
-		ServicoContratado servicoContratado = manager.find(ServicoContratado.class, id);
+		Servicocontratado servicoContratado = manager.find(Servicocontratado.class, id);
 		
 		return servicoContratado;
 	}
 	
-	public List<ServicoContratado> getAllServicosContratados(){
+	public List<Servicocontratado> getAllServicosContratados(String referencia){
 		
 		EntityManager manager = new JPAUtil().getEntityManager();
-		TypedQuery<ServicoContratado> consulta = manager.createQuery("FROM servicocontratado", ServicoContratado.class);
-		List<ServicoContratado> servicosContratados = consulta.getResultList();
+		TypedQuery<Servicocontratado> consulta  = null;
+		if(referencia.equals("confirmado")) {
+			consulta = manager.createQuery("from Servicocontratado where confirmado = true", Servicocontratado.class);
+			List<Servicocontratado> servicosContratados = consulta.getResultList();
+			return servicosContratados;
+		}
+		if(referencia.equals("concluido")) {
+			consulta = manager.createQuery("from Servicocontratado where concluido = true", Servicocontratado.class);
+			List<Servicocontratado> servicosContratados = consulta.getResultList();
+			return servicosContratados;
+		}
+		
 
-		return servicosContratados;
+		return null;
 	}
 	
-	public ServicoContratado createServicoContratado(ServicoContratado servicoContratado){
+	public Servicocontratado createServicoContratado(Servicocontratado servicoContratado){
 		
 		EntityManager manager = new JPAUtil().getEntityManager();
 		manager.getTransaction().begin();
@@ -67,7 +77,7 @@ public class ServicoContratadoService {
 		return null;
 	}
 	
-	public ServicoContratado updateServicoContratado(ServicoContratado servicoContratado){
+	public Servicocontratado updateServicoContratado(Servicocontratado servicoContratado){
 		
 		EntityManager manager = new JPAUtil().getEntityManager();
 		manager.getTransaction().begin();
@@ -80,7 +90,7 @@ public class ServicoContratadoService {
 					if(servicos.getId()==servicoContratado.getId_servico()) {
 						Servico servico = manager.find(Servico.class,servicoContratado.getId_servico());
 						if(servico!=null) {
-							ServicoContratado servicoContratadoRetorno = manager.find(ServicoContratado.class, servicoContratado.getId());
+							Servicocontratado servicoContratadoRetorno = manager.find(Servicocontratado.class, servicoContratado.getId());
 							if(servicoContratadoRetorno!=null) {
 								servicoContratadoRetorno.setConfirmado(servicoContratado.isConfirmado());
 								servicoContratadoRetorno.setConcluido(servicoContratado.isConcluido());
@@ -103,7 +113,7 @@ public class ServicoContratadoService {
 		
 		EntityManager manager = new JPAUtil().getEntityManager();
 		MensagemRetorno retorno = new MensagemRetorno();
-		ServicoContratado servicoContratado = manager.find(ServicoContratado.class, idServicoContratado);
+		Servicocontratado servicoContratado = manager.find(Servicocontratado.class, idServicoContratado);
 		
 		if(servicoContratado!=null) {
 			manager.getTransaction().begin();

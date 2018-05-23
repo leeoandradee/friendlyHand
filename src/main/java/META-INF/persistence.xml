@@ -11,7 +11,7 @@
 		<class>com.friendlyHand.model.Prestador</class>
 		<class>com.friendlyHand.model.Endereco</class>
 		<class>com.friendlyHand.model.Servico</class>
-		<class>com.friendlyHand.model.ServicoContratado</class>
+		<class>com.friendlyHand.model.Servicocontratado</class>
 		
 		<properties>
 			<!-- Propriedades JDBC -->
