@@ -26,22 +26,21 @@ public class ServicoContratadoService {
 		return servicoContratado;
 	}
 	
-	public List<Servicocontratado> getAllServicosContratados(String referencia){
+	public List<Servicocontratado> getAllServicosContratadosUsuario(String usuario, int id_usuario ,String referencia) throws ClassNotFoundException{
 		
 		EntityManager manager = new JPAUtil().getEntityManager();
 		TypedQuery<Servicocontratado> consulta  = null;
-		if(referencia.equals("confirmado")) {
-			consulta = manager.createQuery("from Servicocontratado where confirmado = true", Servicocontratado.class);
+		usuario = "com.friendlyHand.model."+usuario;
+		Class<?> clazz = Class.forName(usuario);
+		Object usuarioQuery = manager.find(clazz, id_usuario);
+		String auxId;
+		if(usuarioQuery!=null) {
+			if(usuarioQuery instanceof Cliente) auxId = "id_cliente";
+			else auxId = "id_prestador";
+			consulta = manager.createQuery("from Servicocontratado where "+referencia+" = true and "+auxId+"="+id_usuario, Servicocontratado.class);
 			List<Servicocontratado> servicosContratados = consulta.getResultList();
 			return servicosContratados;
 		}
-		if(referencia.equals("concluido")) {
-			consulta = manager.createQuery("from Servicocontratado where concluido = true", Servicocontratado.class);
-			List<Servicocontratado> servicosContratados = consulta.getResultList();
-			return servicosContratados;
-		}
-		
-
 		return null;
 	}
 	

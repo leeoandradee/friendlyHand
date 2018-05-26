@@ -20,9 +20,10 @@ public class ServicoContratadoController {
 	@Autowired
 	ServicoContratadoService service;
 	
-	@RequestMapping(method=RequestMethod.GET, value="/servicoscontratados")
-	public List<Servicocontratado> getAllServicosContratados(@RequestParam("referencia")String referencia){
-		return service.getAllServicosContratados(referencia);
+	@RequestMapping(method=RequestMethod.GET, value="/servicoscontratados/{usuario}/{id_usuario}")
+	public List<Servicocontratado> getAllServicosContratadosUsuario(@PathVariable("usuario") String usuario, @PathVariable("id_usuario") int id_usuario,
+			@RequestParam("referencia")String referencia) throws ClassNotFoundException{
+		return service.getAllServicosContratadosUsuario(usuario,id_usuario, referencia);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="servicocontratado/{id}")

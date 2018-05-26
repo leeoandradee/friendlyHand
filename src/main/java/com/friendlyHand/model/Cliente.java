@@ -3,6 +3,7 @@ package com.friendlyHand.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +24,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	"email",
 	"cpf",
 	"dataNascimento",
+	"celular",
+	"foto",
 	"senha",
 	"endereco",
 	"servico_contratados"
@@ -33,9 +36,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonProperty("id_cliente")
 	private int id;
 	@JsonProperty("nome")
 	private String nome;
+	@Column(unique=true)
 	@JsonProperty("email")
 	private String email;
 	@JsonProperty("cpf")
@@ -160,7 +165,3 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	}
 
 }
-
-
-
-

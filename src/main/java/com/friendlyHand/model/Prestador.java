@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +25,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	"email",
 	"cpf",
 	"dataNascimento",
+	"celular",
+	"foto",
 	"senha",
 	"endereco",
 	"servicos",
@@ -40,6 +43,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	@JsonProperty("nome")
 	private String nome;
 	@JsonProperty("email")
+	@Column(unique=true)
 	private String email;
 	@JsonProperty("cpf")
 	private String cpf;
@@ -179,7 +183,3 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	}
 
 }
-
-
-
-
