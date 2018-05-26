@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: Leonardo Andrade
+Build-Jdk: 9.0.4
+Implementation-Title: friendlyHand
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.friendlyHand
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/friendlyHand
+Created-By: Maven Integration for Eclipse
+
