@@ -62,6 +62,7 @@ public class ClienteService {
 			ClienteBanco.setFoto(cliente.getFoto());
 			ClienteBanco.setSenha(cliente.getSenha());
 			ClienteBanco.setServicosContratados(cliente.getServicosContratados());
+			ClienteBanco.setAvaliações(cliente.getAvaliações());
 			manager.merge(ClienteBanco);
 			manager.getTransaction().commit();
 			manager.close();

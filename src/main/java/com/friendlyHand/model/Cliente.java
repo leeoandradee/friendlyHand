@@ -54,6 +54,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	private String foto;
 	@JsonProperty("senha")
 	private String senha;
+	@GeneratedValue
 	@OneToOne(cascade=CascadeType.ALL)
 	@JsonProperty("endereco")
 	private Endereco endereco;
@@ -61,6 +62,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	@ElementCollection(targetClass=Servicocontratado.class)
 	@JsonProperty("servico_contratados")
 	private List<Servicocontratado> servicosContratados;
+	@OneToMany(cascade=CascadeType.ALL)
+	@ElementCollection(targetClass=AvaliacaoPrestador.class)
+	@JsonProperty("avaliações")
+	private List<AvaliacaoPrestador> avaliações;
 	
 
 	@JsonProperty("id_cliente")
@@ -164,4 +169,13 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 		this.servicosContratados = servicosContratados;
 	}
 
+	public List<AvaliacaoPrestador> getAvaliações() {
+		return avaliações;
+	}
+
+	public void setAvaliações(List<AvaliacaoPrestador> avaliações) {
+		this.avaliações = avaliações;
+	}
+	
+	
 }

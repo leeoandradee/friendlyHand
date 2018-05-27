@@ -64,6 +64,7 @@ public class PrestadorService {
 			prestadorBanco.setSenha(prestador.getSenha());
 			prestadorBanco.setServicos(prestador.getServicos());
 			prestadorBanco.setServicosContratados(prestador.getServicosContratados());
+			prestadorBanco.setAvaliações(prestador.getAvaliações());
 			manager.merge(prestadorBanco);
 			manager.getTransaction().commit();
 			manager.close();
