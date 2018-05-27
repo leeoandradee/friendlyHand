@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	"id_servico",
 	"id_prestador",
 	"nome",
+	"categoria_servico",
 	"descricao",
 	"preco"
 })
@@ -29,6 +30,8 @@ public class Servico{
 	private int id_prestador;
 	@JsonProperty("nome")
 	private String nomeServico;
+	@JsonProperty("categoria_servico")
+	private int categoriaServico;
 	@JsonProperty("descricao")
 	private String descricao;
 	@JsonProperty("preco")
@@ -50,6 +53,16 @@ public class Servico{
 		return nomeServico;
 	}
 	
+	@JsonProperty("categoria_servico")
+	public int getCategoriaServico() {
+		return categoriaServico;
+	}
+
+	@JsonProperty("categoria_servico")
+	public void setCategoriaServico(int categoriaServico) {
+		this.categoriaServico = categoriaServico;
+	}
+
 	@JsonProperty("nome")
 	public void setNomeServico(String nomeServico) {
 		this.nomeServico = nomeServico;

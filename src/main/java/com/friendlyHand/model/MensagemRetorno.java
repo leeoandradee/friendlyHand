@@ -18,15 +18,22 @@ public class MensagemRetorno {
 	@JsonProperty("mensagem")
 	private String mensagem;
 	
+	@JsonProperty("status")
 	public String getStatus() {
 		return status;
 	}
+	
+	@JsonProperty("status")
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	@JsonProperty("mensagem")
 	public String getMensagem() {
 		return mensagem;
 	}
+	
+	@JsonProperty("mensagem")
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
 	}
