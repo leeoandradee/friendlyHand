@@ -31,7 +31,7 @@ public class Servico{
 	@JsonProperty("nome")
 	private String nomeServico;
 	@JsonProperty("categoria_servico")
-	private int categoriaServico;
+	private CategoriaServico categoriaServico;
 	@JsonProperty("descricao")
 	private String descricao;
 	@JsonProperty("preco")
@@ -54,12 +54,12 @@ public class Servico{
 	}
 	
 	@JsonProperty("categoria_servico")
-	public int getCategoriaServico() {
+	public CategoriaServico getCategoriaServico() {
 		return categoriaServico;
 	}
 
 	@JsonProperty("categoria_servico")
-	public void setCategoriaServico(int categoriaServico) {
+	public void setCategoriaServico(CategoriaServico categoriaServico) {
 		this.categoriaServico = categoriaServico;
 	}
 
