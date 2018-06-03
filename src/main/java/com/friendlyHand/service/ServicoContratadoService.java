@@ -58,8 +58,6 @@ public class ServicoContratadoService {
 					if(servicos.getId()==servicoContratado.getId_servico()) {
 						Servico servico = manager.find(Servico.class,servicoContratado.getId_servico());
 						if(servico!=null) {
-							TratamentoData bean = new TratamentoData();
-							servicoContratado.setData(bean.gerarData());
 							cliente.getServicosContratados().add(servicoContratado);
 							prestador.getServicosContratados().add(servicoContratado);
 							manager.persist(prestador);
